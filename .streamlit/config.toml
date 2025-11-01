@@ -1,0 +1,14 @@
+[server]
+# Disable file watcher to avoid Windows path issues
+fileWatcherType = "none"
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#2E8B57"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F8E9"
+textColor = "#2D5016"
+font = "sans serif"

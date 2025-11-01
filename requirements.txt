@@ -1,0 +1,6 @@
+streamlit
+pillow
+plotly
+altair
+fpdf
+streamlit-extras
