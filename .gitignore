@@ -1,0 +1,53 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Large data directories (too big for GitHub)
+Database/
+Database_resized/
+shards/
+
+# Model checkpoints and weights
+*.pth
+*.pt
+*.h5
+*.ckpt
+checkpoints/
+models/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Training outputs
+runs/
+tensorboard/
+wandb/
+
+# Generated images (keep diagnostic_sample_images.png for reference)
+# *.png (commented out to keep benchmark and diagnostic images)
+
+# Temporary files
+*.tmp
+temp/

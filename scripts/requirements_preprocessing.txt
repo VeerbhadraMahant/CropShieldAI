@@ -1,0 +1,12 @@
+# CropShield AI - Preprocessing Dependencies
+
+# Image processing (SIMD-optimized for 2-4x faster resizing)
+# Note: pillow-simd requires uninstalling regular Pillow first
+# Run: pip uninstall pillow && pip install pillow-simd
+pillow-simd>=9.0.0
+
+# Progress bar for visual feedback
+tqdm>=4.65.0
+
+# Alternative if pillow-simd doesn't work on your system:
+# Pillow>=9.0.0
