@@ -1,30 +1,35 @@
-/* Custom CSS for CropShield AI - Agricultural Green Theme */
+/* Custom CSS for CropShield AI - Sophisticated Dark Agricultural Theme */
 
 /* ========================================
    CSS VARIABLES
    ======================================== */
 :root {
-    /* Primary Colors */
-    --accent: #2E8B57;
-    --primary-green: #2d5016;
-    --light-green: #7cb342;
-    --accent-green: #a5d6a7;
-    --bg-light: #f1f8e9;
-    --text-dark: #1b5e20;
+    /* Primary Colors - Darker, Richer Tones */
+    --primary-dark: #1a2f1a;
+    --primary-green: #2d4a2d;
+    --accent: #4a7c59;
+    --light-green: #5a9367;
+    --accent-green: #6fa87e;
+    --bg-dark: #1e2a1e;
+    --bg-medium: #2a3a2a;
+    --bg-light: #364636;
+    --text-light: #e8f0e8;
+    --text-muted: #b8c9b8;
     
     /* Secondary Colors */
     --white: #ffffff;
-    --gray-100: #f5f5f5;
-    --gray-300: #e0e0e0;
-    --gray-500: #9e9e9e;
-    --gray-700: #616161;
-    --gray-900: #212121;
+    --off-white: #f5f7f5;
+    --gray-100: #e0e5e0;
+    --gray-300: #c0c8c0;
+    --gray-500: #8a958a;
+    --gray-700: #5a655a;
+    --gray-900: #2a322a;
     
-    /* Status Colors */
-    --success: #4caf50;
-    --warning: #ff9800;
-    --error: #f44336;
-    --info: #2196f3;
+    /* Status Colors - Darker Variants */
+    --success: #4a8f4d;
+    --warning: #d68910;
+    --error: #c94343;
+    --info: #3a7ca5;
     
     /* Spacing */
     --spacing-xs: 0.25rem;
@@ -32,18 +37,20 @@
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
     
     /* Border Radius */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
     
-    /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
-    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.15);
+    /* Shadows - Softer, More Subtle */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.25);
+    --shadow-xl: 0 12px 28px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px rgba(74, 124, 89, 0.3);
 }
 
 /* ========================================
@@ -52,23 +59,36 @@
 
 /* Body and Container */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fafafa;
-    color: var(--gray-900);
-    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #1a2f1a 0%, #243b24 50%, #2a4a2a 100%);
+    color: var(--text-light);
+    line-height: 1.7;
+    letter-spacing: 0.3px;
 }
 
 .main {
-    background-color: #fafafa;
+    background: transparent;
     max-width: 1400px;
     margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
 }
 
 .block-container {
     max-width: 1400px;
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
+}
+
+/* Streamlit specific background override */
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #1a2f1a 0%, #243b24 50%, #2a4a2a 100%);
+}
+
+[data-testid="stHeader"] {
+    background: rgba(26, 47, 26, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 /* ========================================
@@ -77,59 +97,68 @@ body {
 
 /* Base Card Style */
 .card {
-    background: var(--white);
+    background: linear-gradient(145deg, rgba(45, 74, 45, 0.95) 0%, rgba(42, 58, 42, 0.95) 100%);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     padding: var(--spacing-xl);
     margin: var(--spacing-md) 0;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(106, 168, 126, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(106, 168, 126, 0.4);
 }
 
 /* Metric Card */
 .metric-card {
-    background: var(--white);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.9) 0%, rgba(42, 58, 42, 0.9) 100%);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--light-green);
-    transition: all 0.3s ease;
+    border-left: 5px solid var(--accent);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid rgba(90, 147, 103, 0.2);
+    border-right: 1px solid rgba(90, 147, 103, 0.2);
+    border-bottom: 1px solid rgba(90, 147, 103, 0.2);
 }
 
 .metric-card:hover {
-    box-shadow: var(--shadow-md);
-    border-left-width: 6px;
+    box-shadow: var(--shadow-md), 0 0 25px rgba(74, 124, 89, 0.2);
+    border-left-width: 8px;
+    transform: translateY(-3px);
 }
 
 /* Metric Display */
 .metric {
     text-align: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
 }
 
 .metric-value {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--accent);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent-green);
     line-height: 1.2;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .metric-label {
-    font-size: 0.9rem;
-    color: var(--gray-700);
+    font-size: 0.95rem;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
+    letter-spacing: 1.2px;
+    font-weight: 600;
 }
 
 .metric-delta {
-    font-size: 0.85rem;
-    margin-top: var(--spacing-xs);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-sm);
+    color: var(--text-light);
 }
 
 /* ========================================
@@ -138,48 +167,67 @@ body {
 
 /* Base Button Styling */
 .stButton > button {
-    background-color: var(--light-green);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--light-green) 100%);
     color: var(--white);
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 2rem;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 2.5rem;
     font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: all 0.3s ease;
+    font-size: 1.05rem;
+    border: 1px solid rgba(106, 168, 126, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md), 0 0 15px rgba(74, 124, 89, 0.2);
+    letter-spacing: 0.5px;
+    text-transform: none;
 }
 
 .stButton > button:hover {
-    background-color: var(--primary-green);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--light-green) 0%, var(--accent-green) 100%);
+    box-shadow: var(--shadow-lg), 0 0 25px rgba(74, 124, 89, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(106, 168, 126, 0.5);
 }
 
 .stButton > button:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1);
     box-shadow: var(--shadow-sm);
+}
+
+/* Primary Button */
+[data-testid="stButton"] button[kind="primary"],
+.stButton > button[type="primary"] {
+    background: linear-gradient(135deg, #4a7c59 0%, #5a9367 100%);
+    border: 1px solid rgba(106, 168, 126, 0.4);
+    box-shadow: var(--shadow-md), 0 0 20px rgba(74, 124, 89, 0.3);
+}
+
+[data-testid="stButton"] button[kind="primary"]:hover,
+.stButton > button[type="primary"]:hover {
+    background: linear-gradient(135deg, #5a9367 0%, #6fa87e 100%);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(74, 124, 89, 0.5);
 }
 
 /* CTA Button */
 .cta-button {
     background: linear-gradient(135deg, var(--accent) 0%, var(--light-green) 100%);
     color: var(--white);
-    padding: 1rem 3rem;
+    padding: 1.2rem 3.5rem;
     border-radius: var(--radius-xl);
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: none;
-    box-shadow: var(--shadow-lg);
+    font-size: 1.3rem;
+    font-weight: 700;
+    border: 2px solid rgba(106, 168, 126, 0.4);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(74, 124, 89, 0.4);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .cta-button:hover {
-    box-shadow: var(--shadow-xl);
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, var(--light-green) 0%, var(--accent-green) 100%);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(74, 124, 89, 0.6);
+    transform: translateY(-4px) scale(1.03);
+    border-color: rgba(106, 168, 126, 0.6);
 }
 
 /* ========================================
@@ -187,34 +235,47 @@ body {
    ======================================== */
 
 h1, h2, h3, h4, h5, h6 {
-    color: var(--primary-green);
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
+    color: var(--accent-green);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
+    line-height: 1.2;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    line-height: 1.3;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    line-height: 1.4;
 }
 
 .main-title {
-    color: var(--primary-green);
+    color: var(--accent-green);
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 800;
 }
 
 .subtitle {
-    color: var(--light-green);
+    color: var(--text-muted);
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-xl);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xxl);
+    line-height: 1.6;
+}
+
+/* Paragraph text */
+p {
+    color: var(--text-light);
+    line-height: 1.8;
 }
 
 /* ========================================
@@ -225,31 +286,52 @@ h3 {
 .stTextInput > div > div > input,
 .stNumberInput > div > div > input,
 .stSelectbox > div > div > select {
-    border-radius: var(--radius-sm);
-    border: 2px solid var(--gray-300);
-    padding: 0.6rem;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(90, 147, 103, 0.3);
+    padding: 0.75rem 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(42, 58, 42, 0.7);
+    color: var(--text-light);
+    font-size: 1rem;
+    backdrop-filter: blur(5px);
 }
 
 .stTextInput > div > div > input:focus,
 .stNumberInput > div > div > input:focus,
 .stSelectbox > div > div > select:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+    box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.3), var(--shadow-md);
+    background: rgba(42, 58, 42, 0.9);
+    outline: none;
+}
+
+.stTextInput > div > div > input::placeholder,
+.stNumberInput > div > div > input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Select Box */
+.stSelectbox > div > div > div {
+    background: rgba(42, 58, 42, 0.7);
+    border-radius: var(--radius-md);
 }
 
 /* File Uploader */
 .stFileUploader {
-    border: 2px dashed var(--accent);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xl);
-    background: var(--bg-light);
-    transition: all 0.3s ease;
+    border: 3px dashed rgba(74, 124, 89, 0.5);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.5) 0%, rgba(42, 58, 42, 0.5) 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
 }
 
 .stFileUploader:hover {
-    border-color: var(--primary-green);
-    background: var(--accent-green);
+    border-color: var(--accent);
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.7) 0%, rgba(42, 58, 42, 0.7) 100%);
+    box-shadow: 0 0 25px rgba(74, 124, 89, 0.3);
+    transform: scale(1.01);
 }
 
 /* ========================================
@@ -257,11 +339,20 @@ h3 {
    ======================================== */
 
 .stProgress > div > div > div > div {
-    background-color: var(--accent);
+    background: linear-gradient(90deg, var(--accent) 0%, var(--light-green) 50%, var(--accent-green) 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(74, 124, 89, 0.5);
+}
+
+.stProgress > div > div {
+    background: rgba(42, 58, 42, 0.5);
+    border-radius: 10px;
 }
 
 .stSpinner > div {
-    border-top-color: var(--accent) !important;
+    border-top-color: var(--accent-green) !important;
+    border-right-color: var(--accent) !important;
+    border-bottom-color: var(--light-green) !important;
 }
 
 /* ========================================
@@ -269,32 +360,46 @@ h3 {
    ======================================== */
 
 .stAlert {
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Success Alert */
 .stSuccess {
-    background-color: #e8f5e9;
-    border-left: 4px solid var(--success);
+    background: linear-gradient(145deg, rgba(74, 143, 77, 0.25) 0%, rgba(74, 143, 77, 0.15) 100%);
+    border-left: 5px solid var(--success);
+    border-top: 1px solid rgba(74, 143, 77, 0.3);
+    border-right: 1px solid rgba(74, 143, 77, 0.3);
+    border-bottom: 1px solid rgba(74, 143, 77, 0.3);
 }
 
 /* Info Alert */
 .stInfo {
-    background-color: #e3f2fd;
-    border-left: 4px solid var(--info);
+    background: linear-gradient(145deg, rgba(58, 124, 165, 0.25) 0%, rgba(58, 124, 165, 0.15) 100%);
+    border-left: 5px solid var(--info);
+    border-top: 1px solid rgba(58, 124, 165, 0.3);
+    border-right: 1px solid rgba(58, 124, 165, 0.3);
+    border-bottom: 1px solid rgba(58, 124, 165, 0.3);
 }
 
 /* Warning Alert */
 .stWarning {
-    background-color: #fff3e0;
-    border-left: 4px solid var(--warning);
+    background: linear-gradient(145deg, rgba(214, 137, 16, 0.25) 0%, rgba(214, 137, 16, 0.15) 100%);
+    border-left: 5px solid var(--warning);
+    border-top: 1px solid rgba(214, 137, 16, 0.3);
+    border-right: 1px solid rgba(214, 137, 16, 0.3);
+    border-bottom: 1px solid rgba(214, 137, 16, 0.3);
 }
 
 /* Error Alert */
 .stError {
-    background-color: #ffebee;
-    border-left: 4px solid var(--error);
+    background: linear-gradient(145deg, rgba(201, 67, 67, 0.25) 0%, rgba(201, 67, 67, 0.15) 100%);
+    border-left: 5px solid var(--error);
+    border-top: 1px solid rgba(201, 67, 67, 0.3);
+    border-right: 1px solid rgba(201, 67, 67, 0.3);
+    border-bottom: 1px solid rgba(201, 67, 67, 0.3);
 }
 
 /* ========================================
@@ -302,14 +407,26 @@ h3 {
    ======================================== */
 
 .streamlit-expanderHeader {
-    background-color: var(--bg-light);
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    color: var(--primary-green);
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.7) 0%, rgba(42, 58, 42, 0.7) 100%);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    color: var(--accent-green);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    transition: all 0.3s ease;
 }
 
 .streamlit-expanderHeader:hover {
-    background-color: var(--accent-green);
+    background: linear-gradient(145deg, rgba(74, 124, 89, 0.5) 0%, rgba(54, 70, 54, 0.5) 100%);
+    border-color: rgba(74, 124, 89, 0.5);
+    box-shadow: 0 0 15px rgba(74, 124, 89, 0.3);
+}
+
+.streamlit-expanderContent {
+    background: rgba(42, 58, 42, 0.3);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border: 1px solid rgba(74, 124, 89, 0.2);
+    border-top: none;
 }
 
 /* ========================================
@@ -317,11 +434,24 @@ h3 {
    ======================================== */
 
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #f1f8e9 0%, #ffffff 100%);
+    background: linear-gradient(180deg, rgba(26, 47, 26, 0.98) 0%, rgba(30, 42, 30, 0.98) 100%);
+    border-right: 2px solid rgba(74, 124, 89, 0.3);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 [data-testid="stSidebar"] .block-container {
-    padding-top: var(--spacing-lg);
+    padding-top: var(--spacing-xl);
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text-light) !important;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--accent-green) !important;
 }
 
 /* ========================================
@@ -329,20 +459,32 @@ h3 {
    ======================================== */
 
 .stTabs [data-baseweb="tab-list"] {
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
+    background: transparent;
+    border-bottom: 2px solid rgba(74, 124, 89, 0.3);
 }
 
 .stTabs [data-baseweb="tab"] {
-    background-color: var(--gray-100);
-    border-radius: var(--radius-sm);
-    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.5) 0%, rgba(42, 58, 42, 0.5) 100%);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: var(--spacing-md) var(--spacing-xl);
     font-weight: 600;
-    color: var(--gray-700);
+    color: var(--text-muted);
+    border: 1px solid rgba(74, 124, 89, 0.2);
+    border-bottom: none;
+    transition: all 0.3s ease;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: linear-gradient(145deg, rgba(54, 70, 54, 0.7) 0%, rgba(42, 58, 42, 0.7) 100%);
+    color: var(--text-light);
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--light-green) 100%);
     color: var(--white);
+    border-color: var(--accent);
+    box-shadow: 0 -2px 10px rgba(74, 124, 89, 0.3);
 }
 
 /* ========================================
@@ -350,28 +492,35 @@ h3 {
    ======================================== */
 
 .dataframe {
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(74, 124, 89, 0.3);
 }
 
 .dataframe thead th {
-    background-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--light-green) 100%);
     color: var(--white);
-    font-weight: 600;
-    padding: var(--spacing-md);
+    font-weight: 700;
+    padding: var(--spacing-lg);
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid rgba(74, 124, 89, 0.5);
 }
 
 .dataframe tbody td {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-light);
+    background: rgba(42, 58, 42, 0.5);
+    border-bottom: 1px solid rgba(74, 124, 89, 0.2);
 }
 
-.dataframe tbody tr:nth-child(even) {
-    background-color: var(--gray-100);
+.dataframe tbody tr:nth-child(even) td {
+    background: rgba(54, 70, 54, 0.5);
 }
 
-.dataframe tbody tr:hover {
-    background-color: var(--bg-light);
+.dataframe tbody tr:hover td {
+    background: rgba(74, 124, 89, 0.3);
+    transition: background 0.3s ease;
 }
 
 /* ========================================
@@ -384,37 +533,58 @@ h3 {
 }
 
 /* ========================================
+   IMAGE STYLES
+   ======================================== */
+
+.stImage {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid rgba(74, 124, 89, 0.3);
+}
+
+img {
+    border-radius: var(--radius-lg);
+    transition: all 0.4s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-xl), 0 0 30px rgba(74, 124, 89, 0.4);
+}
+
+/* ========================================
    CUSTOM UTILITIES
    ======================================== */
 
 /* Gradient Backgrounds */
 .gradient-green {
-    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    background: linear-gradient(135deg, rgba(74, 124, 89, 0.3) 0%, rgba(90, 147, 103, 0.3) 100%);
 }
 
 .gradient-blue {
-    background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);
+    background: linear-gradient(135deg, rgba(58, 124, 165, 0.3) 0%, rgba(58, 124, 165, 0.2) 100%);
 }
 
 .gradient-orange {
-    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    background: linear-gradient(135deg, rgba(214, 137, 16, 0.3) 0%, rgba(214, 137, 16, 0.2) 100%);
 }
 
 /* Text Colors */
 .text-accent {
-    color: var(--accent);
+    color: var(--accent-green);
 }
 
 .text-primary {
-    color: var(--primary-green);
-}
-
-.text-light {
     color: var(--light-green);
 }
 
+.text-light {
+    color: var(--text-light);
+}
+
 .text-muted {
-    color: var(--gray-500);
+    color: var(--text-muted);
 }
 
 /* Spacing Utilities */
@@ -567,21 +737,25 @@ h3 {
    ======================================== */
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--gray-100);
+    background: rgba(26, 47, 26, 0.5);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 5px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--light-green) 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(26, 47, 26, 0.5);
+    transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-green);
+    background: linear-gradient(180deg, var(--light-green) 0%, var(--accent-green) 100%);
+    box-shadow: 0 0 10px rgba(74, 124, 89, 0.5);
 }
 
 /* ========================================
@@ -608,15 +782,16 @@ h3 {
 
 /* Focus indicators */
 *:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: 3px solid var(--accent-green);
+    outline-offset: 3px;
+    box-shadow: 0 0 15px rgba(74, 124, 89, 0.5);
 }
 
 /* High contrast mode adjustments */
 @media (prefers-contrast: high) {
     .card,
     .metric-card {
-        border: 2px solid var(--gray-900);
+        border: 3px solid var(--accent-green);
     }
 }
 
@@ -626,4 +801,127 @@ h3 {
         animation: none !important;
         transition: none !important;
     }
+}
+
+/* ========================================
+   ADDITIONAL STREAMLIT OVERRIDES
+   ======================================== */
+
+/* Main content area */
+.main .block-container {
+    background: rgba(26, 47, 26, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xxl);
+    backdrop-filter: blur(5px);
+}
+
+/* Widget labels */
+.stSelectbox label,
+.stTextInput label,
+.stNumberInput label,
+.stFileUploader label {
+    color: var(--text-light) !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Metrics from st.metric */
+[data-testid="stMetricValue"] {
+    color: var(--accent-green);
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+[data-testid="stMetricDelta"] {
+    background: rgba(74, 124, 89, 0.2);
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius-sm);
+}
+
+/* Column containers */
+[data-testid="column"] {
+    padding: var(--spacing-sm);
+}
+
+/* Markdown content */
+.stMarkdown {
+    color: var(--text-light);
+}
+
+.stMarkdown h1,
+.stMarkdown h2,
+.stMarkdown h3 {
+    color: var(--accent-green);
+}
+
+.stMarkdown a {
+    color: var(--light-green);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(90, 147, 103, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stMarkdown a:hover {
+    color: var(--accent-green);
+    border-bottom-color: var(--accent-green);
+    text-shadow: 0 0 10px rgba(74, 124, 89, 0.5);
+}
+
+/* Dividers */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(74, 124, 89, 0.5) 50%, transparent 100%);
+    margin: var(--spacing-xl) 0;
+}
+
+/* Code blocks */
+code {
+    background: rgba(26, 47, 26, 0.8);
+    color: var(--accent-green);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+pre {
+    background: rgba(26, 47, 26, 0.8);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    overflow-x: auto;
+}
+
+/* Loading skeleton */
+.element-container.stSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass morphism effect for special cards */
+.glass-card {
+    background: rgba(42, 58, 42, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(106, 168, 126, 0.3);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(74, 124, 89, 0.2);
+}
+
+/* Frosted glass effect */
+.frosted-glass {
+    background: rgba(30, 42, 30, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(106, 168, 126, 0.2);
 }

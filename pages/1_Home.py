@@ -50,10 +50,10 @@ with col1:
         """
         <div class="metric-card" style="text-align: center; padding: 2rem; min-height: 280px;">
             <div style="font-size: 4rem; margin-bottom: 1rem;">📸</div>
-            <h3 style="color: #2d5016; margin-bottom: 1rem;">1. Upload Image</h3>
+<h3 style="color: #2d5016; margin-bottom: 1rem;">1. Upload Image</h3>
             <p style="color: #666; line-height: 1.6;">
                 Take a clear photo of the affected plant parts and upload it. 
-                Our AI supports Wheat, Rice, Potato, Tomato, and Maize.
+                Our AI supports Wheat, Potato, Tomato, and Sugarcane.
             </p>
         </div>
         """,

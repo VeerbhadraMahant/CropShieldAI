@@ -1,0 +1,111 @@
+{
+  "timestamp": "2025-11-14 22:44:59",
+  "tests": [
+    {
+      "name": "predict_disease() Import",
+      "status": "PASS",
+      "message": "Function imported successfully from app.py",
+      "details": {
+        "signature": "(image_input, model=None, class_names=None, top_k=3, device=None)"
+      }
+    },
+    {
+      "name": "predict_disease() Execution",
+      "status": "WARN",
+      "message": "Function exists but not executed (needs test image)",
+      "details": null
+    },
+    {
+      "name": "generate_gradcam() Import",
+      "status": "PASS",
+      "message": "Function found in example_gradcam.py",
+      "details": {
+        "signature": "(model: torch.nn.modules.module.Module, image_tensor: torch.Tensor, target_layer: torch.nn.modules.module.Module, class_idx: Optional[int] = None, device: Optional[torch.device] = None) -> numpy.ndarray"
+      }
+    },
+    {
+      "name": "generate_gradcam() Execution",
+      "status": "WARN",
+      "message": "Function exists but not executed (needs test image)",
+      "details": null
+    },
+    {
+      "name": "Streamlit App: app.py",
+      "status": "PASS",
+      "message": "File compiles successfully",
+      "details": {
+        "components": [
+          "Prediction logic"
+        ]
+      }
+    },
+    {
+      "name": "Streamlit App: app_optimized.py",
+      "status": "PASS",
+      "message": "File compiles successfully",
+      "details": {
+        "components": [
+          "Title definition",
+          "File uploader",
+          "Prediction logic",
+          "GradCAM visualization",
+          "Image display"
+        ]
+      }
+    },
+    {
+      "name": "Streamlit Installation",
+      "status": "PASS",
+      "message": "Version 1.50.0",
+      "details": null
+    },
+    {
+      "name": "Artifact: Baseline Model",
+      "status": "WARN",
+      "message": "Missing: models/cropshield_cnn.pth",
+      "details": null
+    },
+    {
+      "name": "Artifact: Optimized Model",
+      "status": "WARN",
+      "message": "Missing: models/cropshield_cnn_best.pth",
+      "details": null
+    },
+    {
+      "name": "Artifact: Confusion Matrix",
+      "status": "WARN",
+      "message": "Missing: results/confusion_matrix.png",
+      "details": null
+    },
+    {
+      "name": "Artifact: Test Metrics",
+      "status": "WARN",
+      "message": "Missing: results/test_metrics.json",
+      "details": null
+    },
+    {
+      "name": "Dependency: PyTorch",
+      "status": "PASS",
+      "message": "Version 2.8.0+cu128",
+      "details": null
+    },
+    {
+      "name": "Dependency: Pillow",
+      "status": "PASS",
+      "message": "Version 11.3.0",
+      "details": null
+    },
+    {
+      "name": "Dependency: NumPy",
+      "status": "PASS",
+      "message": "Version 2.2.6",
+      "details": null
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "warnings": 6,
+  "total": 14,
+  "elapsed_time": 3.3333218097686768,
+  "deployment_status": "READY"
+}

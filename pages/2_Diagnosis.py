@@ -267,7 +267,7 @@ with st.sidebar:
     st.markdown("---")
     
     st.markdown("### 🌾 Supported Crops")
-    crops = ['Wheat', 'Rice', 'Potato', 'Tomato', 'Maize']
+    crops = ['Wheat', 'Potato', 'Tomato', 'Sugarcane']
     for crop in crops:
         st.markdown(f"✅ {crop}")
     

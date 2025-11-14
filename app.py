@@ -4,6 +4,15 @@
 import streamlit as st
 import os
 import sys
+from pathlib import Path
+
+# Import prediction functionality
+try:
+    from predict import load_model_once, predict_disease as _predict_disease
+    PREDICT_AVAILABLE = True
+except ImportError as e:
+    PREDICT_AVAILABLE = False
+    print(f"Warning: predict module not available: {e}")
 
 # Page configuration
 st.set_page_config(
@@ -30,6 +39,56 @@ def load_css():
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
+
+# Prediction wrapper function for QA validation
+def predict_disease(image_input, model=None, class_names=None, top_k=3, device=None):
+    """
+    Wrapper function for disease prediction.
+    
+    This function serves as the main entry point for disease prediction
+    in the CropShield AI application. It wraps the core prediction logic
+    from predict.py module.
+    
+    Args:
+        image_input: Image path, PIL Image, or numpy array
+        model: Trained PyTorch model (optional, will load if not provided)
+        class_names: List of class names (optional, will load if not provided)
+        top_k: Number of top predictions to return (default: 3)
+        device: Device to run inference on (optional, auto-detect)
+        
+    Returns:
+        List of (class_name, probability) tuples, ordered by probability
+        
+    Example:
+        >>> predictions = predict_disease('test.jpg', top_k=3)
+        >>> for class_name, prob in predictions:
+        ...     print(f"{class_name}: {prob:.2%}")
+    """
+    if not PREDICT_AVAILABLE:
+        raise ImportError("Prediction module not available. Ensure predict.py is in the project directory.")
+    
+    # Load model if not provided
+    if model is None or class_names is None:
+        model_path = Path("models/cropshield_cnn_best.pth")
+        if not model_path.exists():
+            model_path = Path("models/cropshield_cnn.pth")
+        
+        if not model_path.exists():
+            raise FileNotFoundError(
+                "No trained model found. Please train the model first:\n"
+                "  python train_auto.py --epochs 25"
+            )
+        
+        model, class_names, device = load_model_once(str(model_path), device=device)
+    
+    # Run prediction
+    return _predict_disease(
+        image_input=image_input,
+        model=model,
+        class_names=class_names,
+        top_k=top_k,
+        device=device
+    )
 
 # Initialize session state
 if 'history' not in st.session_state:
@@ -169,7 +228,7 @@ if page_selection == "Home":
                 <h3 style="color: #2d5016; margin-bottom: 1rem;">1. Upload Image</h3>
                 <p style="color: #666; line-height: 1.6;">
                     Take a clear photo of the affected plant parts and upload it. 
-                    Our AI supports Wheat, Rice, Potato, Tomato, and Maize.
+                    Our AI supports Wheat, Potato, Tomato, and Sugarcane.
                 </p>
             </div>
             """,

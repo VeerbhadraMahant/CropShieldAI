@@ -75,7 +75,7 @@ def upload_card():
     with col2:
         selected_crop = st.selectbox(
             "🌾 Select Crop Type",
-            options=['Wheat', 'Rice', 'Potato', 'Tomato', 'Maize'],
+            options=['Wheat', 'Potato', 'Tomato', 'Sugarcane'],
             index=0
         )
     

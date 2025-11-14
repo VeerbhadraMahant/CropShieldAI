@@ -7,6 +7,7 @@ This custom Dataset class is optimized for:
 - Automatic grayscale to RGB conversion
 - Robust error handling
 - Zero-copy tensor operations
+- Modular augmentation pipeline (conservative/moderate/aggressive)
 """
 
 import torch
@@ -17,6 +18,14 @@ from pathlib import Path
 import time
 from collections import defaultdict
 import os
+
+# Import our new transforms module
+try:
+    from transforms import get_transforms, IMAGENET_MEAN, IMAGENET_STD
+    TRANSFORMS_AVAILABLE = True
+except ImportError:
+    print("⚠️  transforms.py not found. Using legacy transforms.")
+    TRANSFORMS_AVAILABLE = False
 
 
 class FastImageFolder(Dataset):
@@ -79,8 +88,9 @@ class FastImageFolder(Dataset):
             # Returns tensor in [0, 255] range, shape (C, H, W)
             image = io.read_image(img_path, mode=io.ImageReadMode.RGB)
             
-            # Convert to float [0, 1] range
-            image = image.float() / 255.0
+            # Convert torch tensor to PIL Image for transforms compatibility
+            from torchvision.transforms.functional import to_pil_image
+            image = to_pil_image(image)
             
             # Apply transforms if provided
             if self.transform is not None:
@@ -113,10 +123,11 @@ def make_loaders(
     test_split=0.1,
     num_workers=None,
     seed=42,
-    prefetch_factor=2
+    prefetch_factor=2,
+    augmentation_mode='moderate'  # NEW: augmentation preset
 ):
     """
-    Create train/val/test DataLoaders with optimized settings
+    Create train/val/test DataLoaders with optimized settings and modular augmentation
     
     Args:
         data_dir: Path to preprocessed dataset
@@ -127,6 +138,7 @@ def make_loaders(
         num_workers: Number of worker processes (auto-detect if None)
         seed: Random seed for reproducibility
         prefetch_factor: Number of batches to prefetch per worker
+        augmentation_mode: 'conservative', 'moderate', or 'aggressive' (NEW)
     
     Returns:
         train_loader, val_loader, test_loader, class_names, dataset_info
@@ -151,21 +163,22 @@ def make_loaders(
     # Verify splits
     assert abs(train_split + val_split + test_split - 1.0) < 1e-6, "Splits must sum to 1.0"
     
-    # Define transforms
-    # Training: augmentation (Phase 2 ready)
-    train_transform = transforms.Compose([
-        # Images already 224×224, no resize needed
-        transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomRotation(degrees=15),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
-        # Normalize with ImageNet statistics
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    
-    # Validation/Test: normalize only
-    eval_transform = transforms.Compose([
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
+    # Define transforms using new modular system
+    if TRANSFORMS_AVAILABLE:
+        train_transform, eval_transform = get_transforms(augmentation_mode)
+        print(f"✅ Using {augmentation_mode.upper()} augmentation from transforms.py")
+    else:
+        # Fallback to legacy transforms if transforms.py not available
+        print("⚠️  Using legacy transforms (transforms.py not found)")
+        train_transform = transforms.Compose([
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomRotation(degrees=15),
+            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
+        eval_transform = transforms.Compose([
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
     
     # Load full dataset
     print(f"\n📁 Loading dataset from: {data_dir}")
